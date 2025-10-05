@@ -1,14 +1,13 @@
 # JackRaC
 ## Jack's Resume as Code
 
-# Install dependencies (Debian 12)
-bash
-```
+# Install dependencies
+```bash
 make install
 ```
 
 # Build resume pdf
-bash
-```
+
+```bash
 make build
 ```
