@@ -1,0 +1,91 @@
+% ===========================
+%  Compact One-Pager Template
+% ===========================
+\documentclass[11pt,a4paper]{article}
+
+% Layout and Typography
+\usepackage[margin=1.3cm,footskip=0cm,noheadfoot]{geometry} % Adjust footer space, remove page numbers
+\usepackage{parskip} % Space between paragraphs, no indent
+\setlength{\parskip}{2pt}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX, Scale=MatchLowercase}
+
+% Font Configuration (from YAML or -V flags)
+$if(mainfont)$
+\setmainfont[$if(mainfontoptions)$$mainfontoptions$$endif$]{$mainfont$}
+$endif$
+$if(sansfont)$
+\setsansfont[$if(sansfontoptions)$$sansfontoptions$$endif$]{$sansfont$}
+$endif$
+$if(monofont)$
+\setmonofont[$if(monofontoptions)$$monofontoptions$$endif$]{$monofont$}
+$endif$
+
+% Hyperlink Styling
+\definecolor{LinkBlue}{HTML}{1A73E8}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=LinkBlue,
+    linkcolor=LinkBlue
+}
+
+% List Formatting (tight bullets emitted by Pandoc)
+\setlist[itemize]{
+    topsep=1pt,
+    partopsep=0pt,
+    parsep=0pt,
+    itemsep=0.5pt,
+    leftmargin=12pt
+}
+\providecommand{\tightlist}{
+    \setlength{\itemsep}{0.5pt}
+    \setlength{\parskip}{0pt}
+}
+
+% Heading Styles (no numbering, minimal spacing)
+\setcounter{secnumdepth}{0}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{5pt}{2pt}
+
+% Company Logo and Name Formatting
+\setkeys{Gin}{keepaspectratio}
+\def\maxlogoheight{8mm}
+\newcommand{\company}[2]{%
+    \noindent\raisebox{-0.15\height}{\includegraphics[height=\maxlogoheight]{#1}}%
+    \hspace{0.6em}\textbf{#2}
+}
+
+% Header Section (from YAML)
+\newcommand{\Header}{%
+    \begin{center}
+        {\LARGE\bfseries $title$}\\[-2pt]
+        $if(subtitle)$
+        {\small $subtitle$}\\[-1pt]
+        $endif$
+        {\footnotesize
+            $if(location)$$location$$endif$
+            $if(email)$ \,·\, \href{mailto:$email$}{$email$}$endif$
+            $if(linkedin)$ \,·\, \href{$linkedin$}{LinkedIn}$endif$
+            $if(github)$ \,·\, \href{$github$}{GitHub}$endif$
+        }
+    \end{center}
+    \vspace{2pt}
+}
+
+% Document Setup
+\pagestyle{empty}
+\begin{document}
+
+$if(title)$\Header$endif$
+
+$body$
+
+\end{document}
